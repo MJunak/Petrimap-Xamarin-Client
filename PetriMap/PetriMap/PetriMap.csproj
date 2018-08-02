@@ -5,8 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
-    <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.396" />
+    <EmbeddedResource Update="Resources\TextResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LogicalName>TextResources.resx</LogicalName>
+      <LastGenOutput>TextResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
-
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\TextResources.Designer.cs">
+      <DependentUpon>TextResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

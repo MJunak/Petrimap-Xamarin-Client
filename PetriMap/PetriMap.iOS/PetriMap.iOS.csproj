@@ -188,13 +188,10 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
-    <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.396" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\PetriMap\PetriMap.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{949732AC-984C-408D-889D-97B80D8F68BB}</Project>
       <Name>PetriMap</Name>
     </ProjectReference>
   </ItemGroup>
