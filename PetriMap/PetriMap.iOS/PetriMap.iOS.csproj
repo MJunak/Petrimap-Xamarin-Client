@@ -191,7 +191,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PetriMap\PetriMap.csproj">
-      <Project>{949732AC-984C-408D-889D-97B80D8F68BB}</Project>
+      <Project>{1C166315-344C-46A5-928E-2E904F636AC3}</Project>
       <Name>PetriMap</Name>
     </ProjectReference>
   </ItemGroup>

@@ -13,7 +13,6 @@ using System.Text;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.GoogleMaps.Bindings;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.IO;
 using PetriMap.Resources;

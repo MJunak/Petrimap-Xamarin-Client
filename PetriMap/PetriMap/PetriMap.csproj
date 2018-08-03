@@ -2,14 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
   </PropertyGroup>
 
   <ItemGroup>
+
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.396" />
+
     <EmbeddedResource Update="Resources\TextResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LogicalName>TextResources.resx</LogicalName>
       <LastGenOutput>TextResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <EmbeddedResource Update="App.xaml">
+      <LogicalName>App.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainPage.xaml">
+      <LogicalName>MainPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps.Bindings" Version="2.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
