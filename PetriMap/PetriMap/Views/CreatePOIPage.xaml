@@ -4,9 +4,9 @@
         <!--        <StyleSheet Source="/Assets/styles.css" />-->
     </ContentPage.Resources>
     <ContentPage.Content>
-        <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="SpaceEvenly">
+        <FlexLayout Direction="Column" AlignItems="Stretch" JustifyContent="Start">
             <Label StyleClass="defaultPageTitle" Text="Beschreibung (optional)" />
-            <Editor HeightRequest="70" Keyboard="Text" Text="{Binding Description}" />
+            <Editor  Keyboard="Text" Text="{Binding Description}" />
             <Label Text="Standort" StyleClass="detailPageSubTitle" />
             <maps:Map FlexLayout.AlignSelf="Stretch" HasZoomEnabled="False" FlexLayout.Grow="1" HasScrollEnabled="False" x:Name="Map">
                 <maps:Map.Behaviors>
