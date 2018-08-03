@@ -22,6 +22,8 @@ namespace PetriMap.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Xamarin.FormsGoogleMaps.Init("AIzaSyClEB_Z8V0vIRllNoWHx1xGXqHnvqF-5nk");
+
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

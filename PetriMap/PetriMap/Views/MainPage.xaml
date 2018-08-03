@@ -5,8 +5,8 @@
              Title="{Binding Title}">
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-        <Button Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/CreatePOIPage" Text="Welcome to Xamarin Forms and Prism!" />
+        <Label Text="Welcome to Petrimap!" />
+        <Button Command="{Binding NavigateCommand}" CommandParameter="CreatePOIPage" Text="Create POI" />
     </StackLayout>
 
 </ContentPage>
