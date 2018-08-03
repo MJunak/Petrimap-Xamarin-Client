@@ -1,60 +1,32 @@
-﻿using Prism.Navigation;
-using System.Windows.Input;
-using Xamarin.Forms;
-using System;
-using Prism.Services;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Plugin.Geolocator;
-using System.Collections.Generic;
-using Plugin.Geolocator.Abstractions;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
+using PetriMap.Resources;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
+using Plugin.Permissions;
+using Prism.Navigation;
+using Prism.Services;
+using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.GoogleMaps.Bindings;
-using System.Text.RegularExpressions;
-using System.IO;
-using PetriMap.Resources;
-using Plugin.Permissions;
 
 namespace PetriMap.ViewModels
 {
     public class CreatePOIPageViewModel : ViewModelBase
     {
-        #region Fields
-        private const string DefaultPhotoPlaceholder = "loading_placeholder.jpg";
-
-        private string _firstName;
-        private string _lastName;
-        private string _description;
-        private string _email;
-        private int _selectedCategoryIndex;
-        private Stream _photoStream;
-        private string _street;
-        private string _city;
-        private string _postcode;
-        private string _country;
-        private string _photo;
-        private string _locationDescription;
-        private bool _isLoading;
-        private string _shortAddress;
-        private string _myGpsCoordinates;
-        private bool _hasGpsCoordinates;
-        private double _latitude;
-        private double _longitude;
-        private bool _isLocationDirty;
-        private string _sendButtonText;
-        private bool _hasPhoto;
-        private ICommand _addPhotoCommand;
-        private ICommand _getMyLocationCommand;
-        private ICommand _sendFormCommand;
-        private IPageDialogService _dialogService;
-        private bool _isFindingUserLocation;
-
-        #endregion
-
-        #region Ctor
+        string _description;
+        bool _isLoading;
+        string _myGpsCoordinates;
+        bool _hasGpsCoordinates;
+        double _latitude;
+        double _longitude;
+        string _sendButtonText;
+        ICommand _getMyLocationCommand;
+        ICommand _sendFormCommand;
+        IPageDialogService _dialogService;
+        bool _isFindingUserLocation;
 
         public CreatePOIPageViewModel(INavigationService navigationService,
                                       IPageDialogService dialogService
@@ -65,13 +37,7 @@ namespace PetriMap.ViewModels
             _latitude = double.NaN;
             _longitude = double.NaN;
         }
-        #endregion
-
-        #region Properties
         public ObservableCollection<Pin> MyLocation { get; set; } = new ObservableCollection<Pin>();
-
-
-       
 
         public string Description
         {
@@ -83,36 +49,12 @@ namespace PetriMap.ViewModels
             }
         }
 
-    
         public bool IsFindingUserLocation
         {
             get { return _isFindingUserLocation; }
             set { SetProperty(ref _isFindingUserLocation, value); }
         }
 
-    
-
-     
-        public string Photo
-        {
-            get { return _photo; }
-            set
-            {
-                _photo = value;
-                HasPhoto = !string.IsNullOrEmpty(value);
-                RaisePropertyChanged();
-            }
-        }
-
-        public string LocationDescription
-        {
-            get { return _locationDescription; }
-            set
-            {
-                _locationDescription = value;
-                RaisePropertyChanged();
-            }
-        }
 
         public bool IsLoading
         {
@@ -157,16 +99,6 @@ namespace PetriMap.ViewModels
             }
         }
 
-        public bool HasPhoto
-        {
-            get { return _hasPhoto; }
-            set
-            {
-                _hasPhoto = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public MoveToRegionRequest MoveToRegionRequest
         {
             get;
@@ -177,10 +109,6 @@ namespace PetriMap.ViewModels
 
         public ICommand SendFormCommand
             => _sendFormCommand ?? (_sendFormCommand = new Command(ExecuteSendFormCommand));
-
-        #endregion
-
-        #region Methods
 
 
         private async void ExecuteGetMyLocationCommand(object obj)
@@ -272,8 +200,6 @@ namespace PetriMap.ViewModels
         {
             base.Destroy();
 
-            if (_photoStream != null)
-                _photoStream.Dispose();
         }
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
@@ -298,9 +224,7 @@ namespace PetriMap.ViewModels
             _latitude = address.Latitude;
             _longitude = address.Longitude;
         }
-
        
-        #endregion
     }
 
 }

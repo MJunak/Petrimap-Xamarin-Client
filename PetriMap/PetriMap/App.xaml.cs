@@ -31,6 +31,7 @@ namespace PetriMap
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<CreatePOIPage>();
         }
     }
 }

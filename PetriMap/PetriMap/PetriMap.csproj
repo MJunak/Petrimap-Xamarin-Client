@@ -25,9 +25,20 @@
     <PackageReference Include="Xamarin.Forms.GoogleMaps.Bindings" Version="2.2.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
     <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.0.1" />
+    <EmbeddedResource Update="Views\CreatePOIPage.xaml">
+      <LogicalName>CreatePOIPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Assets\css\styles.css">
+      <LogicalName>styles.css</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Assets\" />
+    <Folder Include="Assets\css\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Assets\css\style.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\TextResources.Designer.cs">
