@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using PetriMap.Resources;
 using Plugin.Geolocator;
@@ -14,7 +15,7 @@ using Xamarin.Forms.GoogleMaps.Bindings;
 
 namespace PetriMap.ViewModels
 {
-    public class CreatePOIPageViewModel : ViewModelBase
+    public class CreatePOIPageViewModel : ViewModelBase, INavigationAware
     {
         string _description;
         bool _isLoading;
@@ -33,7 +34,7 @@ namespace PetriMap.ViewModels
                                       ) : base(navigationService)
         {
             _dialogService = dialogService;
-            SendButtonText = "Senden";
+            SendButtonText = "Senden!";
             _latitude = double.NaN;
             _longitude = double.NaN;
         }
@@ -105,16 +106,19 @@ namespace PetriMap.ViewModels
         } = new MoveToRegionRequest();
 
         public ICommand GetMyLocationCommand
-            => _getMyLocationCommand ?? (_getMyLocationCommand = new Command(ExecuteGetMyLocationCommand));
+        => _getMyLocationCommand ?? (_getMyLocationCommand = new Command(async () => await ExecuteGetMyLocationCommand(null)));
 
         public ICommand SendFormCommand
             => _sendFormCommand ?? (_sendFormCommand = new Command(ExecuteSendFormCommand));
 
 
-        private async void ExecuteGetMyLocationCommand(object obj)
+        private async Task<Plugin.Geolocator.Abstractions.Position> ExecuteGetMyLocationCommand(object obj)
         {
             if (IsBusy)
-                return;
+                return null;
+
+            Plugin.Geolocator.Abstractions.Position myPosition = null;
+
 
             try
             {
@@ -130,7 +134,7 @@ namespace PetriMap.ViewModels
                     if (myPermissions[Plugin.Permissions.Abstractions.Permission.Location] != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
                     {
                         await _dialogService.DisplayAlertAsync(TextResources.Error, "Berechtigung benötigt!", TextResources.Ok);
-                        return;
+                        return null;
                     }
                 }
 
@@ -139,18 +143,17 @@ namespace PetriMap.ViewModels
                     await _dialogService.DisplayAlertAsync(TextResources.LocationRequired, "Bitte schalte GPS ein, um die aktuelle Position zu ermitteln oder gib Deine Adresse manuell ein.",
                         TextResources.Ok);
 
-                    return;
+                    return null;
                 }
 
                 if (!CrossGeolocator.Current.IsGeolocationAvailable)
                 {
                     await _dialogService.DisplayAlertAsync(TextResources.Error, "Die GPS-Erkennung ist momentan nicht verfügbar. Probiere es später nochmal oder gib Deine Adresse manuell ein.",
                         TextResources.Ok);
-                    return;
+                    return null;
                 }
 
-                Plugin.Geolocator.Abstractions.Position myPosition = null;
-
+           
                 // Try get current position
                 try
                 {
@@ -178,22 +181,30 @@ namespace PetriMap.ViewModels
             }
             finally
             {
+                UpdateMap(myPosition);
                 IsLoading = false;
                 IsBusy = false;
+
             }
+            return myPosition;
         }
 
-        private void UpdateMap(Address address)
+        private void UpdateMap(Plugin.Geolocator.Abstractions.Position position)
         {
+
+            var gFormsPos = new Xamarin.Forms.GoogleMaps.Position(position.Latitude, position.Longitude);
             MyLocation.Clear();
             MyLocation.Add(new Pin()
             {
-                Position = new Xamarin.Forms.GoogleMaps.Position(address.Latitude, address.Longitude),
-                Label = $"{address.Thoroughfare} {address.SubThoroughfare}, {address.Locality} {address.PostalCode}"
+                Position = gFormsPos,
+                Label = "My Position"
             });
 
-            MoveToRegionRequest.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.GoogleMaps.Position(address.Latitude, address.Longitude),
+
+            MoveToRegionRequest.MoveToRegion(MapSpan.FromCenterAndRadius(gFormsPos,
                                                                          Distance.FromKilometers(1)));
+
+
         }
 
         public override void Destroy()
@@ -209,14 +220,17 @@ namespace PetriMap.ViewModels
             if (parameters.GetNavigationMode() == NavigationMode.Back)
                 return;
 
+            await ExecuteGetMyLocationCommand(null);
+
+
         }
 
         private async void ExecuteSendFormCommand(object obj)
         {
-        
+
         }
 
-      
+
         private void UpdateMyGpsCoordinates(Address address)
         {
             MyGpsCoordinates = $"Koordinaten erfasst: {address.Latitude.ToString("0.00")}° {address.Longitude.ToString("0.00")}°";
@@ -224,7 +238,7 @@ namespace PetriMap.ViewModels
             _latitude = address.Latitude;
             _longitude = address.Longitude;
         }
-       
+
     }
 
 }

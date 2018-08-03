@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps" xmlns:mapBindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings" x:Class="PetriMap.Views.CreatePOIPage">
     <ContentPage.Resources>
-<!--        <StyleSheet Source="/Assets/styles.css" />-->
+        <!--        <StyleSheet Source="/Assets/styles.css" />-->
     </ContentPage.Resources>
     <ContentPage.Content>
         <FlexLayout Direction="Column" AlignItems="Center" JustifyContent="SpaceEvenly">
@@ -14,9 +14,7 @@
                     <mapBindings:MoveToRegionBehavior Request="{Binding MoveToRegionRequest}" />
                 </maps:Map.Behaviors>
             </maps:Map>
-            <StackLayout Padding="10,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="10">
-                <ActivityIndicator Color="White" VerticalOptions="CenterAndExpand" IsRunning="True" HeightRequest="20" WidthRequest="20" />
-            </StackLayout>
+            <ActivityIndicator Color="White" VerticalOptions="CenterAndExpand" IsRunning="True" HeightRequest="20" WidthRequest="20" />
             <Button Text="{Binding SendButtonText}" Command="{Binding SendFormCommand}" />
         </FlexLayout>
     </ContentPage.Content>
