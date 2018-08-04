@@ -153,7 +153,7 @@ namespace PetriMap.ViewModels
                     return null;
                 }
 
-           
+
                 // Try get current position
                 try
                 {
@@ -191,20 +191,27 @@ namespace PetriMap.ViewModels
 
         private void UpdateMap(Plugin.Geolocator.Abstractions.Position position)
         {
-
-            var gFormsPos = new Xamarin.Forms.GoogleMaps.Position(position.Latitude, position.Longitude);
-            MyLocation.Clear();
-            MyLocation.Add(new Pin()
+            try
             {
-                Position = gFormsPos,
-                Label = "My Position"
-            });
 
 
-            MoveToRegionRequest.MoveToRegion(MapSpan.FromCenterAndRadius(gFormsPos,
-                                                                         Distance.FromKilometers(1)));
+                var gFormsPos = new Xamarin.Forms.GoogleMaps.Position(position.Latitude, position.Longitude);
+                MyLocation.Clear();
+                MyLocation.Add(new Pin()
+                {
+                    Position = gFormsPos,
+                    Label = "My Position"
+                });
 
 
+                MoveToRegionRequest.MoveToRegion(MapSpan.FromCenterAndRadius(gFormsPos,
+                                                                             Distance.FromKilometers(1)));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public override void Destroy()
