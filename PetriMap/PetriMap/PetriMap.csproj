@@ -27,7 +27,7 @@
             <LogicalName>CreatePOIPage.xaml</LogicalName>
         </EmbeddedResource>
         <EmbeddedResource Update="Assets\styles.css">
-            <LogicalName>s</LogicalName>
+            <LogicalName>styles.css</LogicalName>
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
