@@ -5,10 +5,18 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <FlexLayout Direction="Column" AlignItems="Stretch" JustifyContent="Start">
-            <Label StyleClass="defaultPageTitle" Text="Beschreibung (optional)" />
-            <Editor  Keyboard="Text" Text="{Binding Description}" />
+            <Label StyleClass="defaultPageTitle" Text="Name" />
+            <Entry Keyboard="Text" Text="{Binding Description}" />
             <Label Text="Standort" StyleClass="detailPageSubTitle" />
-            <maps:Map FlexLayout.AlignSelf="Stretch" HasZoomEnabled="False" FlexLayout.Grow="1" HasScrollEnabled="False" x:Name="Map">
+            <FlexLayout HeightRequest="20" Direction="Row">
+                <Label FlexLayout.Basis="50%" StyleClass="valueLabel" Text="Longitude" />
+                <Label FlexLayout.Basis="50%" StyleClass="valueLabel" Text="{Binding Longitude}" />
+            </FlexLayout>
+            <FlexLayout HeightRequest="20" Direction="Row">
+                <Label FlexLayout.Basis="50%" StyleClass="valueLabel" Text="Latitude" />
+                <Label FlexLayout.Basis="50%" StyleClass="valueLabel" Text="{Binding Latitude}" />
+            </FlexLayout>
+            <maps:Map FlexLayout.AlignSelf="Stretch" HasZoomEnabled="False" FlexLayout.Grow="0.5" HasScrollEnabled="False" x:Name="Map">
                 <maps:Map.Behaviors>
                     <mapBindings:BindingPinsBehavior Value="{Binding MyLocation}" />
                     <mapBindings:MoveToRegionBehavior Request="{Binding MoveToRegionRequest}" />

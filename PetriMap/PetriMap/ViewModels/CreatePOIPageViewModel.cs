@@ -70,15 +70,27 @@ namespace PetriMap.ViewModels
 
         public bool IsBusy { get; private set; }
 
-        public string MyGpsCoordinates
+        public double Longitude
         {
-            get { return _myGpsCoordinates; }
+            get { return _longitude; }
             set
             {
-                _myGpsCoordinates = value;
+                _longitude = value;
                 RaisePropertyChanged();
             }
         }
+
+        public double Latitude
+        {
+            get { return _latitude; }
+            set
+            {
+                _latitude = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
 
         public bool HasGpsCoordinates
         {
@@ -182,6 +194,10 @@ namespace PetriMap.ViewModels
             finally
             {
                 UpdateMap(myPosition);
+
+                Latitude = myPosition.Latitude;
+                Longitude = myPosition.Longitude;
+
                 IsLoading = false;
                 IsBusy = false;
 
@@ -237,14 +253,6 @@ namespace PetriMap.ViewModels
 
         }
 
-
-        private void UpdateMyGpsCoordinates(Address address)
-        {
-            MyGpsCoordinates = $"Koordinaten erfasst: {address.Latitude.ToString("0.00")}° {address.Longitude.ToString("0.00")}°";
-
-            _latitude = address.Latitude;
-            _longitude = address.Longitude;
-        }
 
     }
 

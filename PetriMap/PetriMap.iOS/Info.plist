@@ -52,5 +52,11 @@
 	<string>PetriMap</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Needs Calendar Permission</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Used to create a POI on your current position</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Used to create a POI on your current position</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 </dict>
 </plist>
