@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using PetriMap.Resources;
 using Plugin.Geolocator;
-using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions;
 using Prism.Navigation;
 using Prism.Services;

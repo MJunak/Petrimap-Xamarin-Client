@@ -1,11 +1,5 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using System.Windows.Input;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace PetriMap.ViewModels
@@ -24,7 +18,7 @@ namespace PetriMap.ViewModels
         public MainPageViewModel(INavigationService navigationService) 
             : base (navigationService)
         {
-            Title = "Petrimap - XForms";
+            Title = "Home";
         }
     }
 }

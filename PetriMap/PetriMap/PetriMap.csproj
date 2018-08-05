@@ -36,6 +36,7 @@
     <ItemGroup>
         <Folder Include="Resources\" />
         <Folder Include="Assets\" />
+        <Folder Include="Model\" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="Resources\TextResources.Designer.cs">
